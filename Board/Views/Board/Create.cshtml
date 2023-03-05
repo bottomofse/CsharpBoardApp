@@ -1,0 +1,16 @@
+﻿@model Board.Models.BoardCreateModel
+@{
+    ViewBag.Title = "掲示板の追加";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+@using (Html.BeginForm("Create", "Board", FormMethod.Post))
+{
+    <p>タイトル:
+        @Html.TextBoxFor(Model => Model.Title)
+    </p>
+    <p>本文</p>
+    @Html.TextAreaFor(Model => Model.Text)
+    <div>
+        <input type="submit" value="作成" />
+    </div>
+}

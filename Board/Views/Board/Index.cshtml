@@ -1,0 +1,11 @@
+﻿@model Board.Models.BoardListModel
+@{
+    ViewBag.Title = "掲示板の一覧";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+@foreach (var board in Model.Boards)
+{
+    <div><p>@board.Title</p></div>
+}
+
