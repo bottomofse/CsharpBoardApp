@@ -6,6 +6,10 @@
 
 @foreach (var board in Model.Boards)
 {
-    <div><p>@board.Title</p></div>
+    <div>
+        <p>
+            @Html.ActionLink(board.Title, "Show", new {id = board.Id })
+        </p>
+    </div>
 }
 

@@ -33,17 +33,42 @@ namespace Board.Controllers
             return View();
         }
 
-        // POST: Board/Create
+        // GET: Board/Create
         [HttpPost]
         public ActionResult Create(BoardCreateModel data)
         {
-            db_.Boards.Add(new BoardEntity
+            var result = db_.Boards.Add(new BoardEntity
             {
                 Title = data.Title,
                 Text = data.Text
             });
+
             db_.SaveChanges();
-            return View();
+            return Redirect("/Board/Show/" + result.Id);
         }
+
+        // GET: Board/Show/{ID}
+        public ActionResult Show(int id)
+        {
+            var board = (from o in db_.Boards where o.Id == id select o).DefaultIfEmpty(null).Single();
+            return View(board);
+        }
+
+        // POST: Board/PostResponse/{id}
+        [HttpPost]
+        public ActionResult PostResponse(int id, BoardPostModel data)
+        {
+            var board = (from o in db_.Boards where o.Id == id select o).DefaultIfEmpty(null).Single();
+            if(board != null)
+            {
+                board.Posts.Add(new BoardPostEntity
+                {
+                    Text = data.Text
+                });
+                db_.SaveChanges();
+            }
+            return Redirect("/Board/Show/" + id);
+        }
+
     }
 }

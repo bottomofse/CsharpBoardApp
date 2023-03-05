@@ -1,0 +1,30 @@
+﻿@model Board.Models.BoardEntity
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+<div>
+    <p>@Model.Title</p>
+    <p>@Model.Text</p>
+</div>
+@if (Model.Posts != null)
+{
+    <div>
+        @foreach (var post in Model.Posts)
+        {
+            <div>
+                @post.Text
+            </div>
+        }
+
+    </div>
+}
+<div>
+    @using (Html.BeginForm("PostResponse", "Board", new { Id = Model.Id}, FormMethod.Post))
+    {
+        <div>
+            @Html.TextArea("Text", "")
+        </div>
+        <input type="submit" value="投稿">
+    }
+</div>

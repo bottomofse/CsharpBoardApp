@@ -40,6 +40,11 @@ namespace Board.Models {
         }
     }
 
+    public class BoardPostModel
+    {
+        public string Text { get; set; }
+
+    }
 
     public class BoardDbContext:DbContext
     {
